@@ -19,7 +19,7 @@ internal class GetProductByIdQueryHandler(IDocumentSession session, ILogger<GetP
         var product = await session.LoadAsync<Product>(request.Id, cancellationToken);
 
         if (product is null)
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException(request.Id);
 
         return new GetProductByIdResult(product);
     }

@@ -43,7 +43,7 @@ public class UpdateProductHandler
         var product = await session.LoadAsync<Product>(request.Id, cancellationToken);
 
         if (product is null)
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException(request.Id);
 
         product.Name = request.Name;
         product.Categories = request.Category;
