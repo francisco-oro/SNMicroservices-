@@ -33,13 +33,11 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductComm
 }
         
 public class UpdateProductHandler
-    (IDocumentSession session, ILogger<UpdateProductHandler> logger)
+    (IDocumentSession session)
     : ICommandHandler<UpdateProductCommand, UpdateProductResult>
 {
     public async Task<UpdateProductResult> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("UpdateProductHandler.Handle called with {@Command}", request);
-
         var product = await session.LoadAsync<Product>(request.Id, cancellationToken);
 
         if (product is null)
