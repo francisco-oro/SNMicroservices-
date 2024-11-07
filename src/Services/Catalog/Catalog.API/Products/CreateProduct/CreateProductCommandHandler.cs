@@ -32,6 +32,7 @@ internal class CreateProductCommandHandler(IDocumentSession session)
     {
         var product = new Product()
         {
+            Id = Guid.NewGuid(),
             Name = command.Name,
             Categories = command.Category,
             Description = command.Description,
