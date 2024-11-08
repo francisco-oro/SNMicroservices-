@@ -1,3 +1,5 @@
+using Marten;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
@@ -12,6 +14,12 @@ builder.Services.AddMediatR(configuration =>
 builder.Services.AddValidatorsFromAssembly(assembly);
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
+builder.Services.AddMarten(options =>
+{
+    options.Connection(builder.Configuration.GetConnectionString("Database")!);
+    options.Schema.For<ShoppingCart>().Identity(x => x.UserName);
+}).UseLightweightSessions();
 
 var app = builder.Build();
 
