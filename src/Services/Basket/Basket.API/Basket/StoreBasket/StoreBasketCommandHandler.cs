@@ -20,6 +20,6 @@ public class StoreBasketCommandHandler
     {
         var basketStored =  await basketRepository.StoreBasket(request.Cart, cancellationToken);
 
-        return new StoreBasketResult(request.Cart.UserName);
+        return new StoreBasketResult(basketStored.UserName);
     }
 }
